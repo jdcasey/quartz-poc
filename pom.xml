@@ -17,12 +17,10 @@
   <properties>
     <apiVersion>1</apiVersion>
     <projectOwner>Red Hat, Inc.</projectOwner>
-    <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>
     <javaVersion>1.8</javaVersion>
     <slf4j-version>1.6.1</slf4j-version>
     <infinispanVersion>8.2.0.Final</infinispanVersion>
-    <luceneVersion>5.3.1</luceneVersion>
-    <bomVersion>21</bomVersion>
+    <quartzVersion>2.2.1</quartzVersion>
   </properties>
 
   <dependencyManagement>
@@ -45,14 +43,16 @@
       <dependency>
         <groupId>org.quartz-scheduler</groupId>
         <artifactId>quartz</artifactId>
-        <version>2.2.1</version>
+        <version>${quartzVersion}</version>
       </dependency>
+      <!--
       <dependency>
         <groupId>org.terracotta.toolkit</groupId>
         <artifactId>terracotta-toolkit-api</artifactId>
         <version>2.1.0</version>
         <scope>provided</scope>
       </dependency>
+      -->
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
@@ -79,28 +79,24 @@
       <groupId>org.quartz-scheduler</groupId>
       <artifactId>quartz</artifactId>
     </dependency>
+    <!--
     <dependency>
       <groupId>org.terracotta.toolkit</groupId>
       <artifactId>terracotta-toolkit-api</artifactId>
     </dependency>
+    -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
 
+  <pluginRepositories>
+  </pluginRepositories>
+
   <build>
     <pluginManagement>
       <plugins>
-        <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          <configuration>
-            <autoVersionSubmodules>true</autoVersionSubmodules>
-            <mavenExecutorId>forked-path</mavenExecutorId>
-            <useReleaseProfile>false</useReleaseProfile>
-            <arguments>-Prelease,run-its</arguments>
-          </configuration>
-        </plugin>
         <plugin>
           <artifactId>maven-plugin-plugin</artifactId>
           <version>3.4</version>
@@ -133,8 +129,32 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.4.0</version>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <!--
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>java</executable>
+          <mainClass>com.commonjava.indy.poc.test.TestQuartzMain</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+    -->
   </build>
 
 </project>

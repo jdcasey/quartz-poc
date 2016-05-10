@@ -1,4 +1,4 @@
-package com.commmonjava.indy.poc;
+package org.commmonjava.indy.poc;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

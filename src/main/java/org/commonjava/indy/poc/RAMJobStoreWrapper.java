@@ -1,4 +1,4 @@
-package com.commonjava.indy.poc;
+package org.commonjava.indy.poc;
 
 import org.quartz.JobKey;
 import org.quartz.JobPersistenceException;
